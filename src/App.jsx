@@ -40,17 +40,18 @@ function App() {
       secure: 'Secure & Reliable',
       secureDesc: 'Trusted payments and verified partners.',
       // Featured
-      featuredTitle: 'This Week\'s Top Picks ✨',
+      featuredTitle: 'This Week\'s Top Picks',
       goaFestival: 'Goa Music Festival 2025',
       delhiManali: 'Delhi to Manali Bus Ride',
       rajasthanTour: 'Rajasthan Heritage Tour',
       bookNow: 'Book Now',
       seeAll: 'See All Experiences',
       // App Download
-      appTitle: 'Your Next Adventure Starts Here',
-      appSubtitle: 'Download the Tixbro app and plan your trip anytime, anywhere.',
+      appTitle: 'Download Our App',
+      appSubtitle: 'Get the Tixbro app for seamless booking on the go. Book tickets, discover events, and plan your journey—all from your phone.',
       appStore: 'App Store',
       googlePlay: 'Google Play',
+      downloadNow: 'Download Now',
       // Footer
       quickLinks: 'Quick Links',
       aboutUs: 'About Us',
@@ -95,17 +96,18 @@ function App() {
       secure: 'सुरक्षित और विश्वसनीय',
       secureDesc: 'विश्वसनीय भुगतान और सत्यापित साझेदार।',
       // Featured
-      featuredTitle: 'इस सप्ताह की शीर्ष पसंद ✨',
+      featuredTitle: 'इस सप्ताह की शीर्ष पसंद',
       goaFestival: 'गोवा संगीत समारोह 2025',
       delhiManali: 'दिल्ली से मनाली बस की सवारी',
       rajasthanTour: 'राजस्थान विरासत यात्रा',
       bookNow: 'अभी बुक करें',
       seeAll: 'सभी अनुभव देखें',
       // App Download
-      appTitle: 'आपका अगला रोमांच यहाँ से शुरू होता है',
-      appSubtitle: 'Tixbro ऐप डाउनलोड करें और किसी भी समय, कहीं भी अपनी यात्रा की योजना बनाएं।',
+      appTitle: 'हमारा ऐप डाउनलोड करें',
+      appSubtitle: 'Tixbro ऐप के साथ चलते-फिरते निर्बाध बुकिंग प्राप्त करें। टिकट बुक करें, कार्यक्रम खोजें, और अपनी यात्रा की योजना बनाएं—सब अपने फोन से।',
       appStore: 'ऐप स्टोर',
       googlePlay: 'गूगल प्ले',
+      downloadNow: 'अभी डाउनलोड करें',
       // Footer
       quickLinks: 'त्वरित लिंक',
       aboutUs: 'हमारे बारे में',
@@ -593,65 +595,204 @@ function App() {
 
       {/* App Download Section */}
       <section style={{
-        padding: '80px 24px',
-        background: 'linear-gradient(135deg, #ff6b35 0%, #ff8c00 50%, #ffa500 100%)',
-        color: 'white',
+        padding: '100px 24px',
+        background: 'linear-gradient(135deg, #fff8e7 0%, #ffe4b5 100%)',
         position: 'relative',
         overflow: 'hidden'
       }}>
-        <div style={{
-          position: 'absolute',
-          top: '-50px',
-          right: '-50px',
-          width: '300px',
-          height: '300px',
-          background: 'rgba(255,255,255,0.1)',
-          borderRadius: '50%',
-          filter: 'blur(60px)'
-        }}></div>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }}>
 
-        <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
-          <h3 style={{ fontSize: '48px', fontWeight: '700', marginBottom: '20px', fontFamily: "'Pacifico', cursive" }}>
-            {text.appTitle}
-          </h3>
-          <p style={{ fontSize: '20px', marginBottom: '40px', opacity: 0.95 }}>
-            {text.appSubtitle}
-          </p>
+          {/* Left Side - Text and Buttons */}
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <h3 style={{
+              fontSize: '48px',
+              fontWeight: '700',
+              marginBottom: '24px',
+              fontFamily: "'Pacifico', cursive",
+              color: '#ff6b35',
+              lineHeight: '1.2'
+            }}>
+              {text.appTitle}
+            </h3>
+            <p style={{
+              fontSize: '18px',
+              marginBottom: '40px',
+              color: '#555',
+              lineHeight: '1.8',
+              fontWeight: '400'
+            }}>
+              {text.appSubtitle}
+            </p>
 
-          <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button style={{
-              padding: '16px 32px',
-              backgroundColor: 'white',
-              color: '#ff6b35',
-              border: 'none',
-              borderRadius: '30px',
-              cursor: 'pointer',
-              fontSize: '16px',
-              fontWeight: '700',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              boxShadow: '0 8px 25px rgba(0,0,0,0.15)'
-            }}>
-              <span style={{ fontSize: '24px' }}>📱</span> {text.appStore}
-            </button>
-            <button style={{
-              padding: '16px 32px',
-              backgroundColor: 'white',
-              color: '#ff6b35',
-              border: 'none',
-              borderRadius: '30px',
-              cursor: 'pointer',
-              fontSize: '16px',
-              fontWeight: '700',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              boxShadow: '0 8px 25px rgba(0,0,0,0.15)'
-            }}>
-              <span style={{ fontSize: '24px' }}>🤖</span> {text.googlePlay}
-            </button>
+            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+              <button style={{
+                padding: '16px 32px',
+                backgroundColor: '#000',
+                color: 'white',
+                border: 'none',
+                borderRadius: '12px',
+                cursor: 'pointer',
+                fontSize: '16px',
+                fontWeight: '600',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,0.3)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
+              }}
+              >
+                {text.appStore}
+              </button>
+              <button style={{
+                padding: '16px 32px',
+                backgroundColor: '#000',
+                color: 'white',
+                border: 'none',
+                borderRadius: '12px',
+                cursor: 'pointer',
+                fontSize: '16px',
+                fontWeight: '600',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,0.3)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
+              }}
+              >
+                {text.googlePlay}
+              </button>
+            </div>
           </div>
+
+          {/* Right Side - 3D Phone Mockup */}
+          <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            {/* Phone Frame */}
+            <div style={{
+              position: 'relative',
+              width: '280px',
+              height: '560px',
+              backgroundColor: '#1a1a1a',
+              borderRadius: '40px',
+              padding: '12px',
+              boxShadow: '0 30px 80px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.1)',
+              transform: 'perspective(1000px) rotateY(-10deg)',
+              transition: 'all 0.5s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'perspective(1000px) rotateY(0deg) scale(1.05)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'perspective(1000px) rotateY(-10deg) scale(1)';
+            }}
+            >
+              {/* Notch */}
+              <div style={{
+                position: 'absolute',
+                top: '12px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: '120px',
+                height: '28px',
+                backgroundColor: '#1a1a1a',
+                borderRadius: '0 0 20px 20px',
+                zIndex: 10
+              }}></div>
+
+              {/* Screen */}
+              <div style={{
+                width: '100%',
+                height: '100%',
+                borderRadius: '32px',
+                overflow: 'hidden',
+                backgroundColor: '#fff',
+                position: 'relative'
+              }}>
+                {/* Screenshot inside phone */}
+                <img
+                  src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=280&h=560&fit=crop"
+                  alt="Tixbro App"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
+                  }}
+                />
+
+                {/* App UI Overlay */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%)',
+                  padding: '40px 20px 20px',
+                  color: 'white'
+                }}>
+                  <div style={{ fontFamily: "'Pacifico', cursive", fontSize: '24px', marginBottom: '8px' }}>
+                    Tixbro
+                  </div>
+                  <div style={{ fontSize: '14px', opacity: 0.9 }}>
+                    {text.heroSubtitle}
+                  </div>
+                </div>
+              </div>
+
+              {/* Power Button */}
+              <div style={{
+                position: 'absolute',
+                right: '-2px',
+                top: '120px',
+                width: '3px',
+                height: '60px',
+                backgroundColor: '#333',
+                borderRadius: '0 3px 3px 0'
+              }}></div>
+
+              {/* Volume Buttons */}
+              <div style={{
+                position: 'absolute',
+                left: '-2px',
+                top: '100px',
+                width: '3px',
+                height: '40px',
+                backgroundColor: '#333',
+                borderRadius: '3px 0 0 3px'
+              }}></div>
+              <div style={{
+                position: 'absolute',
+                left: '-2px',
+                top: '150px',
+                width: '3px',
+                height: '40px',
+                backgroundColor: '#333',
+                borderRadius: '3px 0 0 3px'
+              }}></div>
+            </div>
+
+            {/* Decorative Circle */}
+            <div style={{
+              position: 'absolute',
+              top: '-50px',
+              right: '-50px',
+              width: '200px',
+              height: '200px',
+              background: 'radial-gradient(circle, rgba(255,140,0,0.2) 0%, transparent 70%)',
+              borderRadius: '50%',
+              filter: 'blur(40px)',
+              zIndex: 0
+            }}></div>
+          </div>
+
         </div>
       </section>
 
