@@ -2,261 +2,424 @@ import { useState } from 'react';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCity, setSelectedCity] = useState('');
+
+  const popularCities = ['Mumbai', 'Delhi', 'Bangalore', 'Chennai', 'Kolkata', 'Hyderabad'];
+
+  const categories = [
+    { name: 'Movies', icon: '🎬', count: '1,200+ shows' },
+    { name: 'Events', icon: '🎪', count: '500+ events' },
+    { name: 'Sports', icon: '⚽', count: '300+ matches' },
+    { name: 'Concerts', icon: '🎵', count: '250+ concerts' }
+  ];
+
+  const featured = [
+    {
+      title: 'Bollywood Movie Night',
+      location: 'Mumbai',
+      price: '₹250',
+      rating: 4.8,
+      reviews: 342,
+      image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&h=400&fit=crop'
+    },
+    {
+      title: 'Live Music Concert',
+      location: 'Delhi',
+      price: '₹500',
+      rating: 4.9,
+      reviews: 189,
+      image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=400&fit=crop'
+    },
+    {
+      title: 'Cricket Match Experience',
+      location: 'Bangalore',
+      price: '₹800',
+      rating: 4.7,
+      reviews: 256,
+      image: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=600&h=400&fit=crop'
+    },
+    {
+      title: 'Theater & Drama Show',
+      location: 'Chennai',
+      price: '₹350',
+      rating: 4.6,
+      reviews: 128,
+      image: 'https://images.unsplash.com/photo-1503095396549-807759245b35?w=600&h=400&fit=crop'
+    }
+  ];
+
+  const trustBadges = [
+    { icon: '✓', text: 'Free cancellation', subtitle: 'Cancel up to 24 hours in advance' },
+    { icon: '🎫', text: 'Mobile tickets', subtitle: 'Show your tickets on your phone' },
+    { icon: '⚡', text: 'Instant confirmation', subtitle: 'Get tickets immediately' },
+    { icon: '🏆', text: 'Best price guarantee', subtitle: 'We match any price' }
+  ];
 
   return (
-    <div style={{ fontFamily: 'Arial, sans-serif' }} className={darkMode ? 'dark' : ''}>
+    <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif', backgroundColor: darkMode ? '#0a0a0a' : '#ffffff' }}>
       {/* Header */}
       <header style={{
         backgroundColor: darkMode ? '#1a1a1a' : '#ffffff',
-        borderBottom: '1px solid #ddd',
-        padding: '15px 0'
+        borderBottom: '1px solid #e5e5e5',
+        padding: '16px 0',
+        position: 'sticky',
+        top: 0,
+        zIndex: 1000,
+        boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h1 style={{ color: '#ff6600', fontSize: '28px', margin: 0 }}>Tixbro</h1>
-          <nav style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
-            <a href="#movies" style={{ color: darkMode ? '#fff' : '#333', textDecoration: 'none' }}>Movies</a>
-            <a href="#events" style={{ color: darkMode ? '#fff' : '#333', textDecoration: 'none' }}>Events</a>
-            <a href="#sports" style={{ color: darkMode ? '#fff' : '#333', textDecoration: 'none' }}>Sports</a>
+          <h1 style={{ color: '#ff6b35', fontSize: '26px', margin: 0, fontWeight: '700' }}>Tixbro</h1>
+          <nav style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
+            <a href="#activities" style={{ color: darkMode ? '#fff' : '#333', fontSize: '15px' }}>Activities</a>
+            <a href="#destinations" style={{ color: darkMode ? '#fff' : '#333', fontSize: '15px' }}>Destinations</a>
             <button
               onClick={() => setDarkMode(!darkMode)}
               style={{
-                padding: '8px 15px',
-                background: darkMode ? '#333' : '#f0f0f0',
+                padding: '8px 16px',
+                background: darkMode ? '#2a2a2a' : '#f5f5f5',
                 border: 'none',
-                borderRadius: '4px',
+                borderRadius: '6px',
                 cursor: 'pointer',
-                color: darkMode ? '#fff' : '#333'
+                fontSize: '18px'
               }}
             >
               {darkMode ? '☀️' : '🌙'}
             </button>
             <button style={{
-              padding: '8px 20px',
-              background: '#ff6600',
+              padding: '10px 24px',
+              background: '#ff6b35',
               color: 'white',
               border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer'
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '15px',
+              fontWeight: '600'
             }}>
-              Sign In
+              Sign in
             </button>
           </nav>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main style={{ backgroundColor: darkMode ? '#0d0d0d' : '#f5f5f5', minHeight: '100vh' }}>
-        {/* Hero Section */}
-        <section style={{
-          backgroundColor: darkMode ? '#1a1a1a' : '#fff',
-          padding: '50px 20px',
-          textAlign: 'center'
-        }}>
-          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <h2 style={{ fontSize: '36px', marginBottom: '20px', color: darkMode ? '#fff' : '#333' }}>
-              Book Tickets Online
-            </h2>
-            <p style={{ fontSize: '18px', color: darkMode ? '#aaa' : '#666', marginBottom: '30px' }}>
-              Movies, Events, Sports & More
-            </p>
+      {/* Hero Section with Background Image */}
+      <section style={{
+        backgroundImage: 'linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=1600&h=600&fit=crop)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        padding: '120px 20px 100px',
+        color: 'white',
+        textAlign: 'center'
+      }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <h2 style={{ fontSize: '48px', fontWeight: '700', marginBottom: '16px', lineHeight: '1.2' }}>
+            Discover & Book Amazing Experiences in India
+          </h2>
+          <p style={{ fontSize: '20px', marginBottom: '40px', opacity: 0.95 }}>
+            From movies to concerts, sports to cultural events
+          </p>
 
-            {/* Search Box */}
-            <div style={{
-              maxWidth: '600px',
-              margin: '0 auto',
-              display: 'flex',
-              gap: '10px'
-            }}>
-              <input
-                type="text"
-                placeholder="Search for movies, events..."
-                style={{
-                  flex: 1,
-                  padding: '12px',
-                  border: '1px solid #ddd',
-                  borderRadius: '4px',
-                  fontSize: '16px',
-                  backgroundColor: darkMode ? '#2a2a2a' : '#fff',
-                  color: darkMode ? '#fff' : '#333'
-                }}
-              />
-              <button style={{
-                padding: '12px 30px',
-                background: '#ff6600',
-                color: 'white',
+          {/* Search Box */}
+          <div style={{
+            backgroundColor: 'white',
+            borderRadius: '8px',
+            padding: '8px',
+            display: 'flex',
+            gap: '8px',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.15)'
+          }}>
+            <input
+              type="text"
+              placeholder="What do you want to do?"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{
+                flex: 1,
+                padding: '14px 16px',
                 border: 'none',
                 borderRadius: '4px',
+                fontSize: '16px',
+                outline: 'none',
+                color: '#333'
+              }}
+            />
+            <select
+              value={selectedCity}
+              onChange={(e) => setSelectedCity(e.target.value)}
+              style={{
+                padding: '14px 16px',
+                border: 'none',
+                borderRadius: '4px',
+                fontSize: '16px',
+                outline: 'none',
                 cursor: 'pointer',
-                fontSize: '16px'
-              }}>
-                Search
-              </button>
-            </div>
-          </div>
-        </section>
-
-        {/* Movies Section */}
-        <section id="movies" style={{ padding: '40px 20px' }}>
-          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <h3 style={{ fontSize: '28px', marginBottom: '30px', color: darkMode ? '#fff' : '#333' }}>
-              Now Showing
-            </h3>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-              gap: '20px'
+                backgroundColor: '#f8f8f8',
+                color: '#333'
+              }}
+            >
+              <option value="">Select City</option>
+              {popularCities.map(city => (
+                <option key={city} value={city}>{city}</option>
+              ))}
+            </select>
+            <button style={{
+              padding: '14px 32px',
+              background: '#ff6b35',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontSize: '16px',
+              fontWeight: '600',
+              whiteSpace: 'nowrap'
             }}>
-              {[
-                { title: 'Action Movie', img: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=300&h=400&fit=crop' },
-                { title: 'Drama Film', img: 'https://images.unsplash.com/photo-1594908900066-3f47337549d8?w=300&h=400&fit=crop' },
-                { title: 'Comedy Show', img: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=300&h=400&fit=crop' },
-                { title: 'Thriller Movie', img: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=300&h=400&fit=crop' }
-              ].map((movie, i) => (
-                <div key={i} style={{
-                  backgroundColor: darkMode ? '#1a1a1a' : '#fff',
-                  borderRadius: '8px',
-                  overflow: 'hidden',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-                }}>
-                  <img src={movie.img} alt={movie.title} style={{ width: '100%', height: '300px', objectFit: 'cover' }} />
-                  <div style={{ padding: '15px' }}>
-                    <h4 style={{ margin: '0 0 10px 0', color: darkMode ? '#fff' : '#333' }}>{movie.title}</h4>
+              Search
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Categories */}
+      <section style={{ padding: '60px 20px', backgroundColor: darkMode ? '#0f0f0f' : '#fafafa' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <h3 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '40px', textAlign: 'center', color: darkMode ? '#fff' : '#222' }}>
+            Browse by Category
+          </h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '24px' }}>
+            {categories.map((cat, i) => (
+              <div key={i} style={{
+                backgroundColor: darkMode ? '#1a1a1a' : '#ffffff',
+                padding: '32px',
+                borderRadius: '12px',
+                textAlign: 'center',
+                cursor: 'pointer',
+                border: darkMode ? '1px solid #2a2a2a' : '1px solid #e5e5e5',
+                transition: 'transform 0.2s',
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-4px)'}
+              onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+              >
+                <div style={{ fontSize: '48px', marginBottom: '16px' }}>{cat.icon}</div>
+                <h4 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '8px', color: darkMode ? '#fff' : '#222' }}>{cat.name}</h4>
+                <p style={{ color: darkMode ? '#888' : '#666', fontSize: '14px' }}>{cat.count}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Activities */}
+      <section id="activities" style={{ padding: '60px 20px', backgroundColor: darkMode ? '#0a0a0a' : '#ffffff' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
+            <h3 style={{ fontSize: '32px', fontWeight: '700', color: darkMode ? '#fff' : '#222' }}>
+              Featured Experiences
+            </h3>
+            <a href="#" style={{ color: '#ff6b35', fontSize: '16px', fontWeight: '600' }}>View all →</a>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px' }}>
+            {featured.map((item, i) => (
+              <div key={i} style={{
+                backgroundColor: darkMode ? '#1a1a1a' : '#ffffff',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                cursor: 'pointer',
+                border: darkMode ? '1px solid #2a2a2a' : '1px solid #e5e5e5',
+                transition: 'transform 0.2s, box-shadow 0.2s'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+              >
+                <div style={{ position: 'relative' }}>
+                  <img src={item.image} alt={item.title} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
+                  <div style={{
+                    position: 'absolute',
+                    top: '12px',
+                    right: '12px',
+                    backgroundColor: 'white',
+                    padding: '6px 12px',
+                    borderRadius: '20px',
+                    fontSize: '13px',
+                    fontWeight: '600',
+                    color: '#333'
+                  }}>
+                    ⭐ {item.rating} ({item.reviews})
+                  </div>
+                </div>
+                <div style={{ padding: '20px' }}>
+                  <p style={{ color: '#ff6b35', fontSize: '13px', fontWeight: '600', marginBottom: '8px' }}>📍 {item.location}</p>
+                  <h4 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '12px', color: darkMode ? '#fff' : '#222' }}>{item.title}</h4>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '20px', fontWeight: '700', color: darkMode ? '#fff' : '#222' }}>{item.price}</span>
                     <button style={{
-                      width: '100%',
-                      padding: '10px',
-                      background: '#ff6600',
+                      padding: '8px 20px',
+                      background: '#ff6b35',
                       color: 'white',
                       border: 'none',
-                      borderRadius: '4px',
-                      cursor: 'pointer'
+                      borderRadius: '6px',
+                      cursor: 'pointer',
+                      fontSize: '14px',
+                      fontWeight: '600'
                     }}>
-                      Book Now
+                      Book now
                     </button>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Events Section */}
-        <section id="events" style={{
-          padding: '40px 20px',
-          backgroundColor: darkMode ? '#1a1a1a' : '#fff'
-        }}>
-          <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <h3 style={{ fontSize: '28px', marginBottom: '30px', color: darkMode ? '#fff' : '#333' }}>
-              Upcoming Events
-            </h3>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px' }}>
-              {[
-                {
-                  title: 'Music Concert',
-                  date: 'Dec 15, 2025',
-                  location: 'Mumbai',
-                  img: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400&h=250&fit=crop'
-                },
-                {
-                  title: 'Comedy Night',
-                  date: 'Dec 20, 2025',
-                  location: 'Delhi',
-                  img: 'https://images.unsplash.com/photo-1585699324551-f6c309eedeca?w=400&h=250&fit=crop'
-                },
-                {
-                  title: 'Live Show',
-                  date: 'Dec 25, 2025',
-                  location: 'Bangalore',
-                  img: 'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=400&h=250&fit=crop'
-                }
-              ].map((event, i) => (
-                <div key={i} style={{
-                  backgroundColor: darkMode ? '#0d0d0d' : '#f9f9f9',
-                  borderRadius: '8px',
-                  overflow: 'hidden',
-                  border: darkMode ? '1px solid #333' : '1px solid #e0e0e0'
+      {/* Trust Badges */}
+      <section style={{ padding: '60px 20px', backgroundColor: darkMode ? '#0f0f0f' : '#f8f9fa' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '32px' }}>
+            {trustBadges.map((badge, i) => (
+              <div key={i} style={{ textAlign: 'center' }}>
+                <div style={{
+                  fontSize: '48px',
+                  marginBottom: '16px',
+                  width: '72px',
+                  height: '72px',
+                  margin: '0 auto 16px',
+                  backgroundColor: darkMode ? '#1a1a1a' : '#ffffff',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: darkMode ? '2px solid #2a2a2a' : '2px solid #e5e5e5'
                 }}>
-                  <img src={event.img} alt={event.title} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
-                  <div style={{ padding: '20px' }}>
-                    <h4 style={{ margin: '0 0 10px 0', color: darkMode ? '#fff' : '#333' }}>{event.title}</h4>
-                    <p style={{ margin: '5px 0', color: darkMode ? '#aaa' : '#666', fontSize: '14px' }}>📅 {event.date}</p>
-                    <p style={{ margin: '5px 0', color: darkMode ? '#aaa' : '#666', fontSize: '14px' }}>📍 {event.location}</p>
-                    <button style={{
-                      marginTop: '15px',
-                      width: '100%',
-                      padding: '10px',
-                      background: '#ff6600',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '4px',
-                      cursor: 'pointer'
-                    }}>
-                      Get Tickets
-                    </button>
-                  </div>
+                  {badge.icon}
                 </div>
-              ))}
-            </div>
+                <h4 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '8px', color: darkMode ? '#fff' : '#222' }}>{badge.text}</h4>
+                <p style={{ color: darkMode ? '#888' : '#666', fontSize: '14px' }}>{badge.subtitle}</p>
+              </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Info Section */}
-        <section style={{ padding: '40px 20px' }}>
-          <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
-            <h3 style={{ fontSize: '28px', marginBottom: '30px', color: darkMode ? '#fff' : '#333' }}>
-              Why Choose Tixbro?
-            </h3>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '30px', marginTop: '40px' }}>
-              <div>
-                <div style={{ fontSize: '48px', marginBottom: '10px' }}>🎫</div>
-                <h4 style={{ color: darkMode ? '#fff' : '#333' }}>Easy Booking</h4>
-                <p style={{ color: darkMode ? '#aaa' : '#666' }}>Book tickets in just a few clicks</p>
+      {/* Popular Destinations */}
+      <section id="destinations" style={{ padding: '60px 20px', backgroundColor: darkMode ? '#0a0a0a' : '#ffffff' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <h3 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '40px', textAlign: 'center', color: darkMode ? '#fff' : '#222' }}>
+            Popular Destinations
+          </h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
+            {popularCities.map((city, i) => (
+              <div key={i} style={{
+                backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url(https://images.unsplash.com/photo-${1580000000000 + i * 1000000}?w=400&h=300&fit=crop)`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                height: '180px',
+                borderRadius: '12px',
+                display: 'flex',
+                alignItems: 'flex-end',
+                padding: '20px',
+                cursor: 'pointer',
+                transition: 'transform 0.2s'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+              onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+              >
+                <h4 style={{ color: 'white', fontSize: '22px', fontWeight: '700', margin: 0 }}>{city}</h4>
               </div>
-              <div>
-                <div style={{ fontSize: '48px', marginBottom: '10px' }}>💳</div>
-                <h4 style={{ color: darkMode ? '#fff' : '#333' }}>Secure Payment</h4>
-                <p style={{ color: darkMode ? '#aaa' : '#666' }}>Safe and secure transactions</p>
-              </div>
-              <div>
-                <div style={{ fontSize: '48px', marginBottom: '10px' }}>📱</div>
-                <h4 style={{ color: darkMode ? '#fff' : '#333' }}>Mobile Friendly</h4>
-                <p style={{ color: darkMode ? '#aaa' : '#666' }}>Book from anywhere, anytime</p>
-              </div>
-            </div>
+            ))}
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
+
+      {/* CTA Section with Indian People */}
+      <section style={{
+        backgroundImage: 'linear-gradient(rgba(255,107,53,0.9), rgba(255,107,53,0.85)), url(https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=400&fit=crop)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        padding: '80px 20px',
+        textAlign: 'center',
+        color: 'white'
+      }}>
+        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+          <h3 style={{ fontSize: '36px', fontWeight: '700', marginBottom: '16px' }}>
+            Start Your Journey Today
+          </h3>
+          <p style={{ fontSize: '18px', marginBottom: '32px', opacity: 0.95 }}>
+            Join thousands of happy customers exploring India
+          </p>
+          <button style={{
+            padding: '16px 48px',
+            background: 'white',
+            color: '#ff6b35',
+            border: 'none',
+            borderRadius: '8px',
+            cursor: 'pointer',
+            fontSize: '18px',
+            fontWeight: '700',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
+          }}>
+            Get Started
+          </button>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer style={{
-        backgroundColor: darkMode ? '#1a1a1a' : '#333',
-        color: '#fff',
-        padding: '40px 20px',
-        marginTop: '40px'
+        backgroundColor: darkMode ? '#1a1a1a' : '#2a2a2a',
+        color: '#ffffff',
+        padding: '60px 20px 30px'
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '30px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px', marginBottom: '40px' }}>
             <div>
-              <h4>About Tixbro</h4>
-              <p style={{ color: '#aaa', fontSize: '14px' }}>India's trusted ticket booking platform</p>
+              <h4 style={{ marginBottom: '20px', fontSize: '18px' }}>About Tixbro</h4>
+              <p style={{ color: '#aaa', fontSize: '14px', lineHeight: '1.6' }}>
+                India's most trusted platform for booking movies, events, concerts, and sports tickets.
+              </p>
             </div>
             <div>
-              <h4>Quick Links</h4>
+              <h4 style={{ marginBottom: '20px', fontSize: '18px' }}>Quick Links</h4>
               <ul style={{ listStyle: 'none', padding: 0 }}>
-                <li style={{ marginBottom: '8px' }}><a href="#" style={{ color: '#aaa', textDecoration: 'none' }}>About Us</a></li>
-                <li style={{ marginBottom: '8px' }}><a href="#" style={{ color: '#aaa', textDecoration: 'none' }}>Contact</a></li>
-                <li style={{ marginBottom: '8px' }}><a href="#" style={{ color: '#aaa', textDecoration: 'none' }}>Terms</a></li>
+                {['About Us', 'How it works', 'Careers', 'Blog'].map(link => (
+                  <li key={link} style={{ marginBottom: '12px' }}>
+                    <a href="#" style={{ color: '#aaa', fontSize: '14px' }}>{link}</a>
+                  </li>
+                ))}
               </ul>
             </div>
             <div>
-              <h4>Support</h4>
+              <h4 style={{ marginBottom: '20px', fontSize: '18px' }}>Support</h4>
               <ul style={{ listStyle: 'none', padding: 0 }}>
-                <li style={{ marginBottom: '8px' }}><a href="#" style={{ color: '#aaa', textDecoration: 'none' }}>Help Center</a></li>
-                <li style={{ marginBottom: '8px' }}><a href="#" style={{ color: '#aaa', textDecoration: 'none' }}>FAQs</a></li>
+                {['Help Center', 'Contact Us', 'FAQs', 'Terms'].map(link => (
+                  <li key={link} style={{ marginBottom: '12px' }}>
+                    <a href="#" style={{ color: '#aaa', fontSize: '14px' }}>{link}</a>
+                  </li>
+                ))}
               </ul>
+            </div>
+            <div>
+              <h4 style={{ marginBottom: '20px', fontSize: '18px' }}>Follow Us</h4>
+              <div style={{ display: 'flex', gap: '16px', fontSize: '24px' }}>
+                {['📘', '🐦', '📸', '▶️'].map((icon, i) => (
+                  <a key={i} href="#" style={{ opacity: 0.8 }}>{icon}</a>
+                ))}
+              </div>
             </div>
           </div>
-          <div style={{ borderTop: '1px solid #444', marginTop: '30px', paddingTop: '20px', textAlign: 'center', color: '#aaa' }}>
-            © 2025 Tixbro. All rights reserved.
+          <div style={{
+            borderTop: '1px solid #444',
+            paddingTop: '30px',
+            textAlign: 'center',
+            color: '#888',
+            fontSize: '14px'
+          }}>
+            © 2025 Tixbro. All rights reserved. Made with ❤️ in India
           </div>
         </div>
       </footer>
