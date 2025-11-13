@@ -409,28 +409,28 @@ function App() {
               >
                 <div style={{ position: 'relative', height: '180px' }}>
                   <img src={cat.image} alt={cat.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  <div style={{
-                    position: 'absolute',
-                    top: '16px',
-                    left: '16px',
-                    fontSize: '48px',
-                    filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))'
-                  }}>
+                </div>
+                <div style={{ padding: '28px 24px' }}>
+                  <div style={{ fontSize: '42px', marginBottom: '12px', textAlign: 'center' }}>
                     {cat.icon}
                   </div>
-                </div>
-                <div style={{ padding: '24px' }}>
                   <h4 style={{
-                    fontSize: '22px',
+                    fontSize: '24px',
                     fontWeight: '700',
-                    marginBottom: '12px',
-                    background: cat.color,
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent'
+                    marginBottom: '14px',
+                    color: '#1a1a1a',
+                    textAlign: 'center',
+                    letterSpacing: '-0.5px'
                   }}>
                     {cat.title}
                   </h4>
-                  <p style={{ color: '#666', fontSize: '15px', lineHeight: '1.6' }}>
+                  <p style={{
+                    color: '#555',
+                    fontSize: '16px',
+                    lineHeight: '1.7',
+                    textAlign: 'center',
+                    fontWeight: '400'
+                  }}>
                     {cat.desc}
                   </p>
                 </div>
