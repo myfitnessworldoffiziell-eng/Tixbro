@@ -1,425 +1,565 @@
 import { useState } from 'react';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCity, setSelectedCity] = useState('');
-
-  const popularCities = ['Mumbai', 'Delhi', 'Bangalore', 'Chennai', 'Kolkata', 'Hyderabad'];
-
-  const categories = [
-    { name: 'Movies', icon: '🎬', count: '1,200+ shows' },
-    { name: 'Events', icon: '🎪', count: '500+ events' },
-    { name: 'Sports', icon: '⚽', count: '300+ matches' },
-    { name: 'Concerts', icon: '🎵', count: '250+ concerts' }
-  ];
-
-  const featured = [
-    {
-      title: 'Bollywood Movie Night',
-      location: 'Mumbai',
-      price: '₹250',
-      rating: 4.8,
-      reviews: 342,
-      image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&h=400&fit=crop'
-    },
-    {
-      title: 'Live Music Concert',
-      location: 'Delhi',
-      price: '₹500',
-      rating: 4.9,
-      reviews: 189,
-      image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=400&fit=crop'
-    },
-    {
-      title: 'Cricket Match Experience',
-      location: 'Bangalore',
-      price: '₹800',
-      rating: 4.7,
-      reviews: 256,
-      image: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=600&h=400&fit=crop'
-    },
-    {
-      title: 'Theater & Drama Show',
-      location: 'Chennai',
-      price: '₹350',
-      rating: 4.6,
-      reviews: 128,
-      image: 'https://images.unsplash.com/photo-1503095396549-807759245b35?w=600&h=400&fit=crop'
-    }
-  ];
-
-  const trustBadges = [
-    { icon: '✓', text: 'Free cancellation', subtitle: 'Cancel up to 24 hours in advance' },
-    { icon: '🎫', text: 'Mobile tickets', subtitle: 'Show your tickets on your phone' },
-    { icon: '⚡', text: 'Instant confirmation', subtitle: 'Get tickets immediately' },
-    { icon: '🏆', text: 'Best price guarantee', subtitle: 'We match any price' }
-  ];
 
   return (
-    <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif', backgroundColor: darkMode ? '#0a0a0a' : '#ffffff' }}>
+    <div style={{ fontFamily: "'Poppins', sans-serif", backgroundColor: '#fffef9' }}>
       {/* Header */}
       <header style={{
-        backgroundColor: darkMode ? '#1a1a1a' : '#ffffff',
-        borderBottom: '1px solid #e5e5e5',
-        padding: '16px 0',
+        backgroundColor: 'rgba(255,255,255,0.95)',
+        backdropFilter: 'blur(10px)',
+        padding: '20px 0',
         position: 'sticky',
         top: 0,
         zIndex: 1000,
-        boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+        boxShadow: '0 2px 10px rgba(255,140,0,0.08)'
       }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h1 style={{ color: '#ff6b35', fontSize: '26px', margin: 0, fontWeight: '700' }}>Tixbro</h1>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h1 style={{
+            color: '#ff8c00',
+            fontSize: '32px',
+            margin: 0,
+            fontWeight: '700',
+            fontFamily: "'Pacifico', cursive"
+          }}>
+            Tixbro
+          </h1>
           <nav style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
-            <a href="#activities" style={{ color: darkMode ? '#fff' : '#333', fontSize: '15px' }}>Activities</a>
-            <a href="#destinations" style={{ color: darkMode ? '#fff' : '#333', fontSize: '15px' }}>Destinations</a>
-            <button
-              onClick={() => setDarkMode(!darkMode)}
-              style={{
-                padding: '8px 16px',
-                background: darkMode ? '#2a2a2a' : '#f5f5f5',
-                border: 'none',
-                borderRadius: '6px',
-                cursor: 'pointer',
-                fontSize: '18px'
-              }}
-            >
-              {darkMode ? '☀️' : '🌙'}
-            </button>
+            <a href="#trips" style={{ color: '#333', fontSize: '16px', textDecoration: 'none', fontWeight: '500' }}>Trips</a>
+            <a href="#events" style={{ color: '#333', fontSize: '16px', textDecoration: 'none', fontWeight: '500' }}>Events</a>
+            <a href="#experiences" style={{ color: '#333', fontSize: '16px', textDecoration: 'none', fontWeight: '500' }}>Experiences</a>
             <button style={{
-              padding: '10px 24px',
-              background: '#ff6b35',
+              padding: '12px 28px',
+              background: 'linear-gradient(135deg, #ff8c00 0%, #ff6b35 100%)',
               color: 'white',
               border: 'none',
-              borderRadius: '6px',
+              borderRadius: '25px',
               cursor: 'pointer',
-              fontSize: '15px',
-              fontWeight: '600'
-            }}>
-              Sign in
+              fontSize: '16px',
+              fontWeight: '600',
+              boxShadow: '0 4px 15px rgba(255,140,0,0.3)',
+              transition: 'transform 0.2s'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+            >
+              Sign In
             </button>
           </nav>
         </div>
       </header>
 
-      {/* Hero Section with Background Image */}
+      {/* Hero Section */}
       <section style={{
-        backgroundImage: 'linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=1600&h=600&fit=crop)',
+        backgroundImage: 'linear-gradient(135deg, rgba(255,200,100,0.2) 0%, rgba(100,200,255,0.15) 100%), url(https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1600&h=800&fit=crop)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        padding: '120px 20px 100px',
-        color: 'white',
-        textAlign: 'center'
+        padding: '120px 24px 100px',
+        position: 'relative',
+        overflow: 'hidden'
       }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <h2 style={{ fontSize: '48px', fontWeight: '700', marginBottom: '16px', lineHeight: '1.2' }}>
-            Discover & Book Amazing Experiences in India
+        {/* Organic blob shapes */}
+        <div style={{
+          position: 'absolute',
+          top: '-100px',
+          right: '-100px',
+          width: '400px',
+          height: '400px',
+          background: 'radial-gradient(circle, rgba(255,200,100,0.3) 0%, transparent 70%)',
+          borderRadius: '50%',
+          filter: 'blur(60px)'
+        }}></div>
+        <div style={{
+          position: 'absolute',
+          bottom: '-150px',
+          left: '-150px',
+          width: '500px',
+          height: '500px',
+          background: 'radial-gradient(circle, rgba(100,200,255,0.25) 0%, transparent 70%)',
+          borderRadius: '50%',
+          filter: 'blur(80px)'
+        }}></div>
+
+        <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
+          <h2 style={{
+            fontSize: '64px',
+            fontWeight: '700',
+            marginBottom: '24px',
+            background: 'linear-gradient(135deg, #ff6b35 0%, #ff8c00 50%, #f4a460 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            lineHeight: '1.2',
+            fontFamily: "'Pacifico', cursive"
+          }}>
+            Discover India, One Journey at a Time
           </h2>
-          <p style={{ fontSize: '20px', marginBottom: '40px', opacity: 0.95 }}>
-            From movies to concerts, sports to cultural events
+
+          <p style={{
+            fontSize: '22px',
+            color: '#555',
+            marginBottom: '48px',
+            fontWeight: '400'
+          }}>
+            Book bus rides, concert tickets, and unforgettable experiences — all in one place.
           </p>
 
-          {/* Search Box */}
+          {/* Search Bar */}
           <div style={{
             backgroundColor: 'white',
-            borderRadius: '8px',
-            padding: '8px',
+            borderRadius: '50px',
+            padding: '12px',
             display: 'flex',
-            gap: '8px',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.15)'
+            gap: '12px',
+            maxWidth: '650px',
+            margin: '0 auto 24px',
+            boxShadow: '0 10px 40px rgba(255,140,0,0.15)',
+            border: '2px solid rgba(255,200,100,0.3)'
           }}>
             <input
               type="text"
-              placeholder="What do you want to do?"
+              placeholder="Where do you want to go?"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{
                 flex: 1,
-                padding: '14px 16px',
+                padding: '16px 24px',
                 border: 'none',
-                borderRadius: '4px',
+                borderRadius: '40px',
                 fontSize: '16px',
                 outline: 'none',
+                backgroundColor: 'transparent',
                 color: '#333'
               }}
             />
-            <select
-              value={selectedCity}
-              onChange={(e) => setSelectedCity(e.target.value)}
-              style={{
-                padding: '14px 16px',
-                border: 'none',
-                borderRadius: '4px',
-                fontSize: '16px',
-                outline: 'none',
-                cursor: 'pointer',
-                backgroundColor: '#f8f8f8',
-                color: '#333'
-              }}
-            >
-              <option value="">Select City</option>
-              {popularCities.map(city => (
-                <option key={city} value={city}>{city}</option>
-              ))}
-            </select>
             <button style={{
-              padding: '14px 32px',
-              background: '#ff6b35',
+              padding: '16px 36px',
+              background: 'linear-gradient(135deg, #ff6b35 0%, #ff8c00 100%)',
               color: 'white',
               border: 'none',
-              borderRadius: '4px',
+              borderRadius: '40px',
               cursor: 'pointer',
               fontSize: '16px',
               fontWeight: '600',
               whiteSpace: 'nowrap'
             }}>
-              Search
+              Find Trips
             </button>
           </div>
+
+          <button style={{
+            padding: '16px 36px',
+            background: 'linear-gradient(135deg, #20b2aa 0%, #48d1cc 100%)',
+            color: 'white',
+            border: 'none',
+            borderRadius: '40px',
+            cursor: 'pointer',
+            fontSize: '16px',
+            fontWeight: '600',
+            boxShadow: '0 6px 20px rgba(32,178,170,0.3)',
+            marginRight: '16px'
+          }}>
+            Explore Events
+          </button>
+
+          <p style={{
+            fontSize: '16px',
+            color: '#666',
+            marginTop: '32px',
+            fontStyle: 'italic'
+          }}>
+            From the mountains to music festivals — travel naturally with Tixbro 🌿
+          </p>
         </div>
       </section>
 
-      {/* Categories */}
-      <section style={{ padding: '60px 20px', backgroundColor: darkMode ? '#0f0f0f' : '#fafafa' }}>
+      {/* Categories Section */}
+      <section style={{
+        padding: '80px 24px',
+        background: 'linear-gradient(180deg, #fffef9 0%, #fff8e7 100%)'
+      }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <h3 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '40px', textAlign: 'center', color: darkMode ? '#fff' : '#222' }}>
-            Browse by Category
+          <h3 style={{
+            fontSize: '42px',
+            fontWeight: '700',
+            textAlign: 'center',
+            marginBottom: '60px',
+            color: '#333',
+            fontFamily: "'Pacifico', cursive",
+            background: 'linear-gradient(135deg, #ff6b35 0%, #ff8c00 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}>
+            Everything You Need, Right at Your Fingertips
           </h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '24px' }}>
-            {categories.map((cat, i) => (
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '32px'
+          }}>
+            {[
+              {
+                icon: '🚌',
+                title: 'Bus Tickets',
+                desc: 'Fast, easy, and comfortable journeys.',
+                color: 'linear-gradient(135deg, #ff8c00 0%, #ffa500 100%)',
+                image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop'
+              },
+              {
+                icon: '🚆',
+                title: 'Train Rides',
+                desc: 'Discover India\'s heart through the rails.',
+                color: 'linear-gradient(135deg, #20b2aa 0%, #48d1cc 100%)',
+                image: 'https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=400&h=300&fit=crop'
+              },
+              {
+                icon: '🎵',
+                title: 'Concerts & Events',
+                desc: 'Feel the rhythm, live the moment.',
+                color: 'linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%)',
+                image: 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=400&h=300&fit=crop'
+              },
+              {
+                icon: '🌄',
+                title: 'Nature Trips',
+                desc: 'Breathe in the beauty of the outdoors.',
+                color: 'linear-gradient(135deg, #51cf66 0%, #69db7c 100%)',
+                image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop'
+              },
+              {
+                icon: '🎭',
+                title: 'Cultural Experiences',
+                desc: 'Connect with India\'s colors, art, and soul.',
+                color: 'linear-gradient(135deg, #da77f2 0%, #e599f7 100%)',
+                image: 'https://images.unsplash.com/photo-1531299204812-e6d44d9a185c?w=400&h=300&fit=crop'
+              }
+            ].map((cat, i) => (
               <div key={i} style={{
-                backgroundColor: darkMode ? '#1a1a1a' : '#ffffff',
-                padding: '32px',
-                borderRadius: '12px',
-                textAlign: 'center',
+                backgroundColor: 'white',
+                borderRadius: '24px',
+                overflow: 'hidden',
+                boxShadow: '0 8px 30px rgba(255,140,0,0.1)',
                 cursor: 'pointer',
-                border: darkMode ? '1px solid #2a2a2a' : '1px solid #e5e5e5',
-                transition: 'transform 0.2s',
+                transition: 'transform 0.3s',
+                border: '3px solid transparent',
+                backgroundClip: 'padding-box'
               }}
-              onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-4px)'}
-              onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-8px)';
+                e.currentTarget.style.boxShadow = '0 12px 40px rgba(255,140,0,0.2)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 8px 30px rgba(255,140,0,0.1)';
+              }}
               >
-                <div style={{ fontSize: '48px', marginBottom: '16px' }}>{cat.icon}</div>
-                <h4 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '8px', color: darkMode ? '#fff' : '#222' }}>{cat.name}</h4>
-                <p style={{ color: darkMode ? '#888' : '#666', fontSize: '14px' }}>{cat.count}</p>
+                <div style={{ position: 'relative', height: '180px' }}>
+                  <img src={cat.image} alt={cat.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <div style={{
+                    position: 'absolute',
+                    top: '16px',
+                    left: '16px',
+                    fontSize: '48px',
+                    filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))'
+                  }}>
+                    {cat.icon}
+                  </div>
+                </div>
+                <div style={{ padding: '24px' }}>
+                  <h4 style={{
+                    fontSize: '22px',
+                    fontWeight: '700',
+                    marginBottom: '12px',
+                    background: cat.color,
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent'
+                  }}>
+                    {cat.title}
+                  </h4>
+                  <p style={{ color: '#666', fontSize: '15px', lineHeight: '1.6' }}>
+                    {cat.desc}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Activities */}
-      <section id="activities" style={{ padding: '60px 20px', backgroundColor: darkMode ? '#0a0a0a' : '#ffffff' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
-            <h3 style={{ fontSize: '32px', fontWeight: '700', color: darkMode ? '#fff' : '#222' }}>
-              Featured Experiences
-            </h3>
-            <a href="#" style={{ color: '#ff6b35', fontSize: '16px', fontWeight: '600' }}>View all →</a>
-          </div>
+      {/* Why Tixbro Section */}
+      <section style={{
+        padding: '80px 24px',
+        background: 'linear-gradient(135deg, #fff8e7 0%, #ffe4b5 30%, #ffebcd 100%)',
+        position: 'relative'
+      }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
+          <h3 style={{
+            fontSize: '42px',
+            fontWeight: '700',
+            marginBottom: '20px',
+            fontFamily: "'Pacifico', cursive",
+            color: '#ff6b35'
+          }}>
+            Travel Simple. Travel Smart. Travel with Tixbro.
+          </h3>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px' }}>
-            {featured.map((item, i) => (
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '40px',
+            marginTop: '60px'
+          }}>
+            {[
+              { icon: '✅', title: 'All-in-One Platform', desc: 'Bus, concerts, and experiences in one place.' },
+              { icon: '🪔', title: 'Indian by Heart', desc: 'Made for travelers who love authentic journeys.' },
+              { icon: '🔒', title: 'Secure & Reliable', desc: 'Trusted payments and verified partners.' }
+            ].map((item, i) => (
               <div key={i} style={{
-                backgroundColor: darkMode ? '#1a1a1a' : '#ffffff',
-                borderRadius: '12px',
+                backgroundColor: 'white',
+                padding: '40px 32px',
+                borderRadius: '20px',
+                boxShadow: '0 8px 30px rgba(255,140,0,0.12)'
+              }}>
+                <div style={{ fontSize: '56px', marginBottom: '20px' }}>{item.icon}</div>
+                <h4 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '12px', color: '#333' }}>{item.title}</h4>
+                <p style={{ color: '#666', fontSize: '16px', lineHeight: '1.6' }}>{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Experiences */}
+      <section id="experiences" style={{ padding: '80px 24px', backgroundColor: '#fffef9' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <h3 style={{
+            fontSize: '42px',
+            fontWeight: '700',
+            textAlign: 'center',
+            marginBottom: '60px',
+            fontFamily: "'Pacifico', cursive",
+            color: '#ff6b35'
+          }}>
+            This Week's Top Picks ✨
+          </h3>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px' }}>
+            {[
+              {
+                title: 'Goa Music Festival 2025',
+                price: '₹499',
+                image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&h=400&fit=crop',
+                tag: 'Music'
+              },
+              {
+                title: 'Delhi to Manali Bus Ride',
+                price: '₹899',
+                image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop',
+                tag: 'Travel'
+              },
+              {
+                title: 'Rajasthan Heritage Tour',
+                price: '₹1,299',
+                image: 'https://images.unsplash.com/photo-1532664189809-02133fee698d?w=600&h=400&fit=crop',
+                tag: 'Culture'
+              }
+            ].map((exp, i) => (
+              <div key={i} style={{
+                backgroundColor: 'white',
+                borderRadius: '20px',
                 overflow: 'hidden',
+                boxShadow: '0 8px 30px rgba(0,0,0,0.08)',
                 cursor: 'pointer',
-                border: darkMode ? '1px solid #2a2a2a' : '1px solid #e5e5e5',
-                transition: 'transform 0.2s, box-shadow 0.2s'
+                transition: 'all 0.3s'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-4px)';
-                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
+                e.currentTarget.style.transform = 'translateY(-8px)';
+                e.currentTarget.style.boxShadow = '0 16px 50px rgba(255,140,0,0.2)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = 'none';
+                e.currentTarget.style.boxShadow = '0 8px 30px rgba(0,0,0,0.08)';
               }}
               >
-                <div style={{ position: 'relative' }}>
-                  <img src={item.image} alt={item.title} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
+                <div style={{ position: 'relative', height: '240px' }}>
+                  <img src={exp.image} alt={exp.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   <div style={{
                     position: 'absolute',
-                    top: '12px',
-                    right: '12px',
-                    backgroundColor: 'white',
-                    padding: '6px 12px',
+                    top: '16px',
+                    right: '16px',
+                    backgroundColor: 'rgba(255,255,255,0.95)',
+                    padding: '8px 16px',
                     borderRadius: '20px',
                     fontSize: '13px',
                     fontWeight: '600',
-                    color: '#333'
+                    color: '#ff6b35'
                   }}>
-                    ⭐ {item.rating} ({item.reviews})
+                    {exp.tag}
                   </div>
                 </div>
-                <div style={{ padding: '20px' }}>
-                  <p style={{ color: '#ff6b35', fontSize: '13px', fontWeight: '600', marginBottom: '8px' }}>📍 {item.location}</p>
-                  <h4 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '12px', color: darkMode ? '#fff' : '#222' }}>{item.title}</h4>
+                <div style={{ padding: '24px' }}>
+                  <h4 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '16px', color: '#333' }}>{exp.title}</h4>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: '20px', fontWeight: '700', color: darkMode ? '#fff' : '#222' }}>{item.price}</span>
+                    <span style={{ fontSize: '24px', fontWeight: '700', color: '#ff6b35' }}>{exp.price}</span>
                     <button style={{
-                      padding: '8px 20px',
-                      background: '#ff6b35',
+                      padding: '10px 24px',
+                      background: 'linear-gradient(135deg, #ff6b35 0%, #ff8c00 100%)',
                       color: 'white',
                       border: 'none',
-                      borderRadius: '6px',
+                      borderRadius: '20px',
                       cursor: 'pointer',
-                      fontSize: '14px',
+                      fontSize: '15px',
                       fontWeight: '600'
                     }}>
-                      Book now
+                      Book Now
                     </button>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Trust Badges */}
-      <section style={{ padding: '60px 20px', backgroundColor: darkMode ? '#0f0f0f' : '#f8f9fa' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '32px' }}>
-            {trustBadges.map((badge, i) => (
-              <div key={i} style={{ textAlign: 'center' }}>
-                <div style={{
-                  fontSize: '48px',
-                  marginBottom: '16px',
-                  width: '72px',
-                  height: '72px',
-                  margin: '0 auto 16px',
-                  backgroundColor: darkMode ? '#1a1a1a' : '#ffffff',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  border: darkMode ? '2px solid #2a2a2a' : '2px solid #e5e5e5'
-                }}>
-                  {badge.icon}
-                </div>
-                <h4 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '8px', color: darkMode ? '#fff' : '#222' }}>{badge.text}</h4>
-                <p style={{ color: darkMode ? '#888' : '#666', fontSize: '14px' }}>{badge.subtitle}</p>
-              </div>
-            ))}
+          <div style={{ textAlign: 'center', marginTop: '48px' }}>
+            <button style={{
+              padding: '16px 40px',
+              background: 'linear-gradient(135deg, #20b2aa 0%, #48d1cc 100%)',
+              color: 'white',
+              border: 'none',
+              borderRadius: '30px',
+              cursor: 'pointer',
+              fontSize: '16px',
+              fontWeight: '600',
+              boxShadow: '0 6px 20px rgba(32,178,170,0.3)'
+            }}>
+              See All Experiences
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Popular Destinations */}
-      <section id="destinations" style={{ padding: '60px 20px', backgroundColor: darkMode ? '#0a0a0a' : '#ffffff' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <h3 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '40px', textAlign: 'center', color: darkMode ? '#fff' : '#222' }}>
-            Popular Destinations
-          </h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
-            {popularCities.map((city, i) => (
-              <div key={i} style={{
-                backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url(https://images.unsplash.com/photo-${1580000000000 + i * 1000000}?w=400&h=300&fit=crop)`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                height: '180px',
-                borderRadius: '12px',
-                display: 'flex',
-                alignItems: 'flex-end',
-                padding: '20px',
-                cursor: 'pointer',
-                transition: 'transform 0.2s'
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-              onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-              >
-                <h4 style={{ color: 'white', fontSize: '22px', fontWeight: '700', margin: 0 }}>{city}</h4>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section with Indian People */}
+      {/* App Download Section */}
       <section style={{
-        backgroundImage: 'linear-gradient(rgba(255,107,53,0.9), rgba(255,107,53,0.85)), url(https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=400&fit=crop)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        padding: '80px 20px',
-        textAlign: 'center',
-        color: 'white'
+        padding: '80px 24px',
+        background: 'linear-gradient(135deg, #ff6b35 0%, #ff8c00 50%, #ffa500 100%)',
+        color: 'white',
+        position: 'relative',
+        overflow: 'hidden'
       }}>
-        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-          <h3 style={{ fontSize: '36px', fontWeight: '700', marginBottom: '16px' }}>
-            Start Your Journey Today
+        <div style={{
+          position: 'absolute',
+          top: '-50px',
+          right: '-50px',
+          width: '300px',
+          height: '300px',
+          background: 'rgba(255,255,255,0.1)',
+          borderRadius: '50%',
+          filter: 'blur(60px)'
+        }}></div>
+
+        <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
+          <h3 style={{ fontSize: '48px', fontWeight: '700', marginBottom: '20px', fontFamily: "'Pacifico', cursive" }}>
+            Your Next Adventure Starts Here
           </h3>
-          <p style={{ fontSize: '18px', marginBottom: '32px', opacity: 0.95 }}>
-            Join thousands of happy customers exploring India
+          <p style={{ fontSize: '20px', marginBottom: '40px', opacity: 0.95 }}>
+            Download the Tixbro app and plan your trip anytime, anywhere.
           </p>
-          <button style={{
-            padding: '16px 48px',
-            background: 'white',
-            color: '#ff6b35',
-            border: 'none',
-            borderRadius: '8px',
-            cursor: 'pointer',
-            fontSize: '18px',
-            fontWeight: '700',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
-          }}>
-            Get Started
-          </button>
+
+          <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button style={{
+              padding: '16px 32px',
+              backgroundColor: 'white',
+              color: '#ff6b35',
+              border: 'none',
+              borderRadius: '30px',
+              cursor: 'pointer',
+              fontSize: '16px',
+              fontWeight: '700',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              boxShadow: '0 8px 25px rgba(0,0,0,0.15)'
+            }}>
+              <span style={{ fontSize: '24px' }}>📱</span> App Store
+            </button>
+            <button style={{
+              padding: '16px 32px',
+              backgroundColor: 'white',
+              color: '#ff6b35',
+              border: 'none',
+              borderRadius: '30px',
+              cursor: 'pointer',
+              fontSize: '16px',
+              fontWeight: '700',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              boxShadow: '0 8px 25px rgba(0,0,0,0.15)'
+            }}>
+              <span style={{ fontSize: '24px' }}>🤖</span> Google Play
+            </button>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
       <footer style={{
-        backgroundColor: darkMode ? '#1a1a1a' : '#2a2a2a',
-        color: '#ffffff',
-        padding: '60px 20px 30px'
+        backgroundColor: '#2a2a2a',
+        color: 'white',
+        padding: '60px 24px 30px'
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px', marginBottom: '40px' }}>
             <div>
-              <h4 style={{ marginBottom: '20px', fontSize: '18px' }}>About Tixbro</h4>
+              <h4 style={{ fontSize: '24px', marginBottom: '16px', fontFamily: "'Pacifico', cursive", color: '#ff8c00' }}>Tixbro</h4>
               <p style={{ color: '#aaa', fontSize: '14px', lineHeight: '1.6' }}>
-                India's most trusted platform for booking movies, events, concerts, and sports tickets.
+                Made for travelers, dreamers, and music lovers ✨
               </p>
             </div>
             <div>
-              <h4 style={{ marginBottom: '20px', fontSize: '18px' }}>Quick Links</h4>
+              <h4 style={{ marginBottom: '16px', fontSize: '16px' }}>Quick Links</h4>
               <ul style={{ listStyle: 'none', padding: 0 }}>
-                {['About Us', 'How it works', 'Careers', 'Blog'].map(link => (
-                  <li key={link} style={{ marginBottom: '12px' }}>
-                    <a href="#" style={{ color: '#aaa', fontSize: '14px' }}>{link}</a>
+                {['About Us', 'Support', 'Terms', 'Privacy Policy'].map(link => (
+                  <li key={link} style={{ marginBottom: '10px' }}>
+                    <a href="#" style={{ color: '#aaa', fontSize: '14px', textDecoration: 'none' }}>{link}</a>
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <h4 style={{ marginBottom: '20px', fontSize: '18px' }}>Support</h4>
-              <ul style={{ listStyle: 'none', padding: 0 }}>
-                {['Help Center', 'Contact Us', 'FAQs', 'Terms'].map(link => (
-                  <li key={link} style={{ marginBottom: '12px' }}>
-                    <a href="#" style={{ color: '#aaa', fontSize: '14px' }}>{link}</a>
-                  </li>
-                ))}
-              </ul>
+              <h4 style={{ marginBottom: '16px', fontSize: '16px' }}>Language</h4>
+              <div style={{ display: 'flex', gap: '12px' }}>
+                <button style={{ padding: '8px 16px', backgroundColor: '#ff8c00', color: 'white', border: 'none', borderRadius: '15px', cursor: 'pointer', fontSize: '14px' }}>
+                  English
+                </button>
+                <button style={{ padding: '8px 16px', backgroundColor: '#444', color: 'white', border: 'none', borderRadius: '15px', cursor: 'pointer', fontSize: '14px' }}>
+                  हिंदी
+                </button>
+              </div>
             </div>
             <div>
-              <h4 style={{ marginBottom: '20px', fontSize: '18px' }}>Follow Us</h4>
-              <div style={{ display: 'flex', gap: '16px', fontSize: '24px' }}>
-                {['📘', '🐦', '📸', '▶️'].map((icon, i) => (
-                  <a key={i} href="#" style={{ opacity: 0.8 }}>{icon}</a>
+              <h4 style={{ marginBottom: '16px', fontSize: '16px' }}>Follow Us</h4>
+              <div style={{ display: 'flex', gap: '16px', fontSize: '28px' }}>
+                {['📸', '🐦', '▶️'].map((icon, i) => (
+                  <a key={i} href="#" style={{ opacity: 0.8, transition: 'opacity 0.2s' }}
+                    onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
+                    onMouseLeave={(e) => e.currentTarget.style.opacity = '0.8'}
+                  >
+                    {icon}
+                  </a>
                 ))}
               </div>
             </div>
           </div>
+
           <div style={{
             borderTop: '1px solid #444',
-            paddingTop: '30px',
+            paddingTop: '24px',
             textAlign: 'center',
             color: '#888',
             fontSize: '14px'
           }}>
-            © 2025 Tixbro. All rights reserved. Made with ❤️ in India
+            © 2025 Tixbro. Made with ❤️ in India 🇮🇳
           </div>
         </div>
       </footer>
